@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Haze Watch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <h1>Haze Watch</h1>
+      <p>Air quality and weather for Singapore and the ASEAN region</p>
+    </div>
+    <div class="status">
+      <span class="pill" id="status"><i></i><span id="statusText">Loading</span></span>
+      <span class="eyebrow num" id="updated"></span>
+      <button class="btn primary" id="refresh" type="button">Refresh</button>
+    </div>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="View">
+    <button role="tab" id="tab-sg" aria-selected="true" aria-controls="sg">Singapore</button>
+    <button role="tab" id="tab-asean" aria-selected="false" aria-controls="asean">ASEAN cities</button>
+  </div>
+
+  <div id="notice"></div>
+
+  <section id="sg" role="tabpanel" aria-labelledby="tab-sg" style="display:flex;flex-direction:column;gap:20px">
+    <div class="card hz">
+      <div><div class="mono">Singapore · NEA 24-hour PSI</div><h2>PSI by area</h2></div>
+      <div class="hz-grid">
+        <div class="hz-map" id="map"></div>
+        <div class="hz-detail" id="detail"></div>
+      </div>
+      <div class="hz-legend" id="legend"></div>
+      <p class="hz-note" id="hzNote"></p>
+    </div>
+
+    <div class="strip" id="strip"></div>
+
+    <div class="two">
+      <div class="card" id="wx"></div>
+      <div class="card">
+        <h2>Health guidance</h2>
+        <p class="cap">NEA advice for <span id="advRegion" style="text-transform:capitalize"></span></p>
+        <div class="seg" id="seg"></div>
+        <div class="advice" id="advice"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="trend-head">
+        <div><h2 id="sgTrendTitle">PM2.5 trend</h2><p class="cap">Hourly PM2.5 in µg/m³ for the past 24 hours (NEA 1-hour readings, data.gov.sg)</p></div>
+        <div class="readout" id="sgReadout"></div>
+      </div>
+      <div class="chart" id="sgChart"></div>
+    </div>
+  </section>
+
+  <section id="asean" role="tabpanel" aria-labelledby="tab-asean" hidden style="flex-direction:column;gap:20px">
+    <div class="card">
+      <div class="trend-head">
+        <div><h2 id="asTrendTitle">PM2.5 trend</h2><p class="cap">Hourly PM2.5 in µg/m³, past 24 hours and next 48 hours (Open-Meteo, CAMS model)</p></div>
+        <div class="readout" id="asReadout"></div>
+      </div>
+      <div class="chart" id="asChart"></div>
+    </div>
+    <div class="toolbar">
+      <div><h2 style="margin:0;font-size:15px;font-weight:600">Cities</h2><p class="cap">US AQI and current conditions. Select a city to chart its PM2.5.</p></div>
+      <label class="cap" style="margin:0">Sort by
+        <select id="sort"><option value="aqi">Highest AQI</option><option value="name">Name</option><option value="temp">Temperature</option></select>
+      </label>
+    </div>
+    <div class="cities" id="cities"></div>
+  </section>
+
+  <footer>
+    <span>Singapore haze data (PSI, PM2.5, pollutants): National Environment Agency via data.gov.sg. Weather, and haze data for the other ASEAN cities: Open-Meteo.</span>
+    <span>PSI (Singapore) and US AQI are different scales and are not directly comparable. Official advice: <a href="https://www.haze.gov.sg" target="_blank" rel="noopener">haze.gov.sg</a>.</span>
+  </footer>
+</div>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
